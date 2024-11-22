@@ -33,7 +33,7 @@ public class SinglyLinkedList {
 	}
 	
 	int listSize() {
-		System.out.print("\nlist-size: ");
+		
 		if(head == null) {
 			System.out.println("Empty list!");
 			return 0;
@@ -44,16 +44,65 @@ public class SinglyLinkedList {
 			count++;
 			current = current.next;
 		}
+		System.out.print("\nlist-size: "+count+"\n");
 		return count;
+	}
+	
+	void insertFirst(int value) {
+		ListNode newNode = new ListNode(value);
+		newNode.next = head;
+		head = newNode;
+	}
+	
+	void insertEnd(int value) {
+		ListNode newNode = new ListNode(value);
+		
+		if(head == null) {
+			head = newNode;
+			return;
+		}
+		
+		ListNode current = head;
+		while(current.next != null) {
+			current = current.next;
+		}
+		current.next = newNode; 
+	}
+	
+	void insertAtPosition(int position, int value) {
+		ListNode newNode = new ListNode(value);
+		
+		int size = listSize();
+		if( 0 > position || position > size) {
+			System.out.println("position not in range 1-"+size);
+			return;
+		}
+		if(position == 1) {
+			 newNode.next = head;
+			 head = newNode;
+			
+		}else {
+			
+			ListNode previous = head;
+			int count = 1;
+			while( count < position - 1 ) {
+				count++;
+				previous=previous.next;
+			}
+
+			ListNode current = previous.next;
+			newNode.next = current;
+			previous.next = newNode;
+		}
 	}
 	
 	public static void main(String[] args) {
 		
 		SinglyLinkedList sll = new SinglyLinkedList();
-		sll.head = new ListNode(10);
-		ListNode second = new ListNode(5);
-		ListNode third = new ListNode(45);
-		ListNode forth = new ListNode(56);
+		sll.head = new ListNode(1);
+		ListNode second = new ListNode(2);
+		ListNode third = new ListNode(3);
+		ListNode forth = new ListNode(4);
 		
 		
 		// Connect all node to form a chain
@@ -61,9 +110,18 @@ public class SinglyLinkedList {
 		second.next = third;// 10 -> 5 -> 45
 		third.next = forth;// 10 -> 5 -> 45 -> 56 -> null
 		
+		//insertFirst
+		sll.insertFirst(101);
+		
+		//insert at end
+		sll.insertEnd(44);
+		
+		//insert at position
+		sll.insertAtPosition(4, 65);
+		
 		sll.display();
 		
-		System.out.println(sll.listSize());
+		sll.listSize();
 		
 		
 	}
