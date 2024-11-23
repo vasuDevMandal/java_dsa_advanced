@@ -28,14 +28,14 @@ public class SinglyLinkedList {
 			System.out.print( current.data +" -> ");// Print current node data				
 			current = current.next;// move to next node			
 		}		
-		System.out.print("null");
+		System.out.print("null\n");
 		
 	}
 	
 	int listSize() {
 		
 		if(head == null) {
-			System.out.println("Empty list!");
+			System.out.println("list-size: Empty list!");
 			return 0;
 		}
 		ListNode current = head;
@@ -49,12 +49,14 @@ public class SinglyLinkedList {
 	}
 	
 	void insertFirst(int value) {
+		System.out.println("inserFirst - "+value);
 		ListNode newNode = new ListNode(value);
 		newNode.next = head;
 		head = newNode;
 	}
 	
 	void insertEnd(int value) {
+		System.out.println("inserEnd - "+value);
 		ListNode newNode = new ListNode(value);
 		
 		if(head == null) {
@@ -70,6 +72,7 @@ public class SinglyLinkedList {
 	}
 	
 	void insertAtPosition(int position, int value) {
+		System.out.println("insert at pos: "+position +" -> "+value);
 		ListNode newNode = new ListNode(value);
 		
 		int size = listSize();
@@ -96,6 +99,65 @@ public class SinglyLinkedList {
 		}
 	}
 	
+	ListNode deleteFirst() {
+		System.out.println("\ndeleteFirst() called..\n");
+		if(head == null) {
+			return head;
+		}
+		ListNode temp = head;
+		head = head.next;
+		temp.next = null;
+		return temp;
+	}
+	
+	ListNode deleteLast() {
+		if(head == null || head.next == null) {
+			return head;
+		}
+		
+		ListNode current = head;
+		ListNode previous = null;
+		while(current.next != null) {
+			previous = current;
+			current = current.next;
+		}
+		previous.next = null;
+		return current;
+		
+	}
+	
+	ListNode deleteAtPosition(int position) {
+		if (position == 1) {
+			head = head.next; 
+			return head;
+		}else {
+//			my version------
+//			ListNode current = head;
+//			ListNode previous = null;
+//			int count=1;
+//			while(count < position) {
+//				previous = current;
+//				current = current.next;
+//				count++;
+//			}
+//			previous.next = current.next;
+//			return current;
+			
+			ListNode previous = head;
+			int count = 1;
+			while(count < position -1) {
+				previous = previous.next;
+				count++;
+			}
+			ListNode current = previous.next;
+			previous.next = current.next;
+			
+			return current;
+			
+		}
+		
+	}
+	
 	public static void main(String[] args) {
 		
 		SinglyLinkedList sll = new SinglyLinkedList();
@@ -112,15 +174,18 @@ public class SinglyLinkedList {
 		
 		//insertFirst
 		sll.insertFirst(101);
-		
 		//insert at end
 		sll.insertEnd(44);
-		
 		//insert at position
 		sll.insertAtPosition(4, 65);
+		//deleteFirst
+//		System.out.println("deleted node: " + sll.deleteFirst().data); 
 		
 		sll.display();
+		System.out.println("delete item: "+sll.deleteAtPosition(7).data);
 		
+		
+		sll.display();
 		sll.listSize();
 		
 		
