@@ -260,7 +260,12 @@ public class SinglyLinkedList {
 		
 		ListNode current = head;
 		ListNode prev = null;
-		while(current != null && current.data < value) {
+		if(current!=null && current.data==value) {
+			prev=head;
+			head=current.next;
+			return prev;
+		}
+		while(current != null && current.data != value) {
 			prev = current;
 			current = current.next;
 		}
@@ -272,6 +277,23 @@ public class SinglyLinkedList {
 		return current;
 	}
 	
+	boolean detectLoop() {
+		ListNode slowPtr = head;
+		ListNode fastPtr = head;
+		while(fastPtr !=null && fastPtr.next!=null) {
+			slowPtr = slowPtr.next;
+			fastPtr=fastPtr.next.next;
+			if(slowPtr == fastPtr) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	void findStartOfLoop() {
+		
+	}
+	
 	public static void main(String[] args) {
 		
 		SinglyLinkedList sll = new SinglyLinkedList();
@@ -279,7 +301,6 @@ public class SinglyLinkedList {
 		ListNode second = new ListNode(2);
 		ListNode third = new ListNode(3);
 		ListNode forth = new ListNode(4);
-		
 		
 		// Connect all node to form a chain
 		sll.head.next = second;// 10 -> 5
@@ -318,16 +339,25 @@ public class SinglyLinkedList {
 //		sll.removeDuplicatesSorted();
 		
 		//insert node in sorted SLL
-		sll.insertSorted(45);sll.display();
-		sll.insertSorted(12);sll.display();
-		sll.insertSorted(26);sll.display();
-		sll.insertSorted(8);sll.display();
-		
+//		sll.insertSorted(45);sll.display();
+//		sll.insertSorted(12);sll.display();
+//		sll.insertSorted(26);sll.display();
+//		sll.insertSorted(8);sll.display();
+//		
 		//delete in sorted array
-		sll.deleteNodeInSorted(261);
+//		sll.deleteNodeInSorted(261);
 		
-		sll.display();
-		sll.listSize();
+		
+		//detect loop | STOP display or any other function call..
+//		ListNode fifth = new ListNode(5);
+//		forth.next = fifth;
+//		fifth.next= third;
+//		System.out.println("loop detected: "+sll.detectLoop()); 
+		
+		
+		
+//		sll.display();
+//		sll.listSize();
 		
 		
 	}
