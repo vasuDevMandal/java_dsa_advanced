@@ -158,6 +158,72 @@ public class SinglyLinkedList {
 		
 	}
 	
+	boolean search(int val) {
+		
+		ListNode current = head;
+		while(current != null) {
+			if(val == current.data) {
+				return true;
+			}
+			current = current.next;
+		}
+		return false;
+		
+	}
+	
+	void reverseList() {
+		ListNode previous = null;
+		ListNode current = head;
+		ListNode next = null;
+		
+		while(current != null) {
+			next = current.next;
+			current.next = previous;
+			previous = current;
+			current = next;
+		}
+		head = previous;
+	}
+	
+	ListNode FindMiddleNode() {
+		if(head == null) {
+			return null;
+		}
+		
+		ListNode slowPtr = head;
+		ListNode fastPtr = head;
+		
+		while(fastPtr != null && fastPtr.next != null) {
+			slowPtr = slowPtr.next;
+			fastPtr = fastPtr.next.next; 
+		}
+		return slowPtr;
+	}
+	
+	
+	ListNode FindNodeFromEnd(int position) {
+		if(head==null || position > listSize() || position < 1) {
+//			throw new IllegalArgumentException("Invalid value entered or List is Empty!");
+			return null;
+		}
+		ListNode mainPtr = head;
+		ListNode refPtr = head;
+		
+		int count = 0;
+		while(count < position) {
+			refPtr = refPtr.next ;
+			count++;
+		}
+		while(refPtr!=null) {
+			refPtr = refPtr.next;
+			mainPtr = mainPtr.next;
+		}
+		System.out.println("\nnode at position:" + 
+		position +" from END is -> " + mainPtr.data);
+		
+		return mainPtr;
+	}
+	
 	public static void main(String[] args) {
 		
 		SinglyLinkedList sll = new SinglyLinkedList();
@@ -173,17 +239,27 @@ public class SinglyLinkedList {
 		third.next = forth;// 10 -> 5 -> 45 -> 56 -> null
 		
 		//insertFirst
-		sll.insertFirst(101);
+//		sll.insertFirst(101);
 		//insert at end
-		sll.insertEnd(44);
+//		sll.insertEnd(44);
 		//insert at position
-		sll.insertAtPosition(4, 65);
+//		sll.insertAtPosition(4, 65);
 		//deleteFirst
 //		System.out.println("deleted node: " + sll.deleteFirst().data); 
 		
-		sll.display();
-		System.out.println("delete item: "+sll.deleteAtPosition(7).data);
+//		sll.display();
+//		System.out.println("delete item: "+sll.deleteAtPosition(2).data);
 		
+//		System.out.println("search: " + sll.search(4));
+		
+//		sll.display();
+		
+//		System.out.println("reverseList: ");
+//		sll.reverseList();
+		
+//		System.out.println("middle: " + sll.FindMiddleNode().data);
+		
+		sll.FindNodeFromEnd(7);
 		
 		sll.display();
 		sll.listSize();
