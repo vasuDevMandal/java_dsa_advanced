@@ -224,6 +224,54 @@ public class SinglyLinkedList {
 		return mainPtr;
 	}
 	
+	//remove duplicates from sorted SLL
+	void removeDuplicatesSorted() {
+		if(head == null) {
+			return;
+		}
+		ListNode current = head;
+		while(current != null && current.next != null) {
+			if(current.data == current.next.data) {
+				current.next = current.next.next;
+			}else {
+				current = current.next;
+			}
+		}
+		
+	}
+	
+	//insert node in sorted List
+	void insertSorted(int value) {
+		System.out.println("insert: " + value);
+		
+		ListNode newNode = new ListNode(value);
+		ListNode current = head;
+		ListNode prev = null;
+		while(current != null && current.data < newNode.data ) {
+			prev = current;
+			current = current.next;
+		}
+		prev.next = newNode;
+		newNode.next = current;
+		
+	}
+	
+	ListNode deleteNodeInSorted(int value) {
+		
+		ListNode current = head;
+		ListNode prev = null;
+		while(current != null && current.data < value) {
+			prev = current;
+			current = current.next;
+		}
+		if(current == null) {
+			System.out.println("\ncannot delete,provided node not in list");
+			return null;
+		}
+		prev.next =  current.next;
+		return current;
+	}
+	
 	public static void main(String[] args) {
 		
 		SinglyLinkedList sll = new SinglyLinkedList();
@@ -251,15 +299,32 @@ public class SinglyLinkedList {
 //		System.out.println("delete item: "+sll.deleteAtPosition(2).data);
 		
 //		System.out.println("search: " + sll.search(4));
-		
 //		sll.display();
 		
 //		System.out.println("reverseList: ");
 //		sll.reverseList();
 		
 //		System.out.println("middle: " + sll.FindMiddleNode().data);
+//		sll.FindNodeFromEnd(7);
 		
-		sll.FindNodeFromEnd(7);
+		//remove duplicates from sorted SLL
+//		sll.insertEnd(5);
+//		sll.insertEnd(5);
+//		sll.insertEnd(5);
+//		sll.insertEnd(6);
+//		sll.insertEnd(6);
+//		sll.insertEnd(7);
+//		sll.display();
+//		sll.removeDuplicatesSorted();
+		
+		//insert node in sorted SLL
+		sll.insertSorted(45);sll.display();
+		sll.insertSorted(12);sll.display();
+		sll.insertSorted(26);sll.display();
+		sll.insertSorted(8);sll.display();
+		
+		//delete in sorted array
+		sll.deleteNodeInSorted(261);
 		
 		sll.display();
 		sll.listSize();
