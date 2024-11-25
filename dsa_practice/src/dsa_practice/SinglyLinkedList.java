@@ -290,9 +290,59 @@ public class SinglyLinkedList {
 		return false;
 	}
 	
-	void findStartOfLoop() {
+	ListNode detectLoopStartingPoint() {
+		ListNode slowPtr = head;
+		ListNode fastPtr = head;
+		while(fastPtr !=null && fastPtr.next!=null) {
+			slowPtr = slowPtr.next;
+			fastPtr=fastPtr.next.next;
+			if(slowPtr == fastPtr) {
+				return FloyedCycleDetection(slowPtr);
+			}
+		}
+		return null;
+	}
+	
+	ListNode FloyedCycleDetection(ListNode slowPtr) {
+		ListNode temp = head;
+		
+		while(temp != slowPtr) {
+			temp = temp.next;
+			slowPtr = slowPtr.next;
+		}
+		return temp;
 		
 	}
+	
+	
+	ListNode detectAndRemoveLoop() {
+		ListNode slowPtr = head;
+		ListNode fastPtr = head;
+		while(fastPtr !=null && fastPtr.next!=null) {
+			slowPtr = slowPtr.next;
+			fastPtr=fastPtr.next.next;
+			if(slowPtr == fastPtr) {
+				 return removeLoop(slowPtr);
+			}
+		}
+		return null;
+	}
+	
+	
+	ListNode removeLoop(ListNode slowPtr) {
+		ListNode temp = head;
+		
+		while(temp.next != slowPtr.next) {
+			temp = temp.next;
+			slowPtr = slowPtr.next;
+		}
+		slowPtr.next = null;
+		System.out.println("detected loop starting point: "+temp.next.data);
+		System.out.println("loop removed!");
+		return temp.next;
+		
+	}
+	
 	
 	public static void main(String[] args) {
 		
@@ -349,15 +399,17 @@ public class SinglyLinkedList {
 		
 		
 		//detect loop | STOP display or any other function call..
-//		ListNode fifth = new ListNode(5);
-//		forth.next = fifth;
-//		fifth.next= third;
-//		System.out.println("loop detected: "+sll.detectLoop()); 
+		ListNode fifth = new ListNode(5);
+		forth.next = fifth;
+		fifth.next= third;
+		System.out.println("loop detected: "+sll.detectLoop()); 
+		
+		System.out.println("detect loop start point: " + sll.detectAndRemoveLoop().data);
 		
 		
 		
-//		sll.display();
-//		sll.listSize();
+		sll.display();
+		sll.listSize();
 		
 		
 	}
