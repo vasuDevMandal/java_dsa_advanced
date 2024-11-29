@@ -111,7 +111,7 @@ public class DoublyLinkedList {
 			tail.previous.next = null;
 		}
 		tail = tail.previous;
-		temp.next = null;
+		temp.previous = null;
 		length--;
 		return temp;
 	}
@@ -131,10 +131,10 @@ public class DoublyLinkedList {
 //		dll.displayBackward();
 		
 		//deletefirst
-		System.out.println("deleted : " + dll.deleteFirst().data);
+		System.out.println("deleted from start: " + dll.deleteFirst().data);
 		
 		//deleteLAst
-		System.out.println("deleted : " + dll.deleteLast().data);
+		System.out.println("deleted from end: " + dll.deleteLast().data);
 		
 		
 		
