@@ -1,7 +1,5 @@
 package dsa_practice;
 
-import java.util.Scanner;
-
 class Stack2{
 	int n = 10;
     int top = -1;

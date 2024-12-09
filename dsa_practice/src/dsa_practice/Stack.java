@@ -1,7 +1,6 @@
 package dsa_practice;
 
 import java.util.EmptyStackException;
-import java.util.NoSuchElementException;
 
 public class Stack {
 	//stack via linked list

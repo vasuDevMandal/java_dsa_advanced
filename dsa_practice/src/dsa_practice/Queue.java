@@ -63,6 +63,7 @@ public class Queue {
 		System.out.print("null\n" );
 	}
 	
+	
 	public static void main(String[] args) {
 		Queue q = new Queue();
 		
