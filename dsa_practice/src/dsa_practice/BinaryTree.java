@@ -1,4 +1,5 @@
 package dsa_practice;
+import java.util.Stack;
 
 public class BinaryTree {
 	
@@ -81,6 +82,67 @@ public class BinaryTree {
 			
 		}
 	
+		public void preOrderViaStack(TreeNode root) {
+			if(root == null) {
+				return;
+			}
+			
+			Stack<TreeNode> stack = new Stack<>();
+			stack.push(root);
+			
+			while(!stack.isEmpty()) {
+				TreeNode temp = stack.pop();
+				System.out.print( temp.data +" ");
+				if(temp.right != null) {
+					stack.push(temp);
+				}
+				if(temp.left != null) {
+					stack.push(temp);
+				}
+			}
+		}
+		
+		public void postOrderViaStack(TreeNode root) {
+			if(root == null) {
+				return;
+			}
+			
+			Stack<TreeNode> stack = new Stack<>();
+			stack.push(root);
+			
+			while(!stack.isEmpty()) {
+				TreeNode temp = stack.pop();
+				if(temp.right != null) {
+					stack.push(temp);
+				}
+				if(temp.left != null) {
+					stack.push(temp);
+				}
+				System.out.print( temp.data +" ");
+			}
+		}
+		
+		public void InOrderViaStack(TreeNode root) {
+			if(root == null) {
+				return;
+			}
+			
+			Stack<TreeNode> stack = new Stack<>();
+			stack.push(root);
+			
+			while(!stack.isEmpty()) {
+				TreeNode temp = stack.pop();
+				
+				if(temp.right != null) {
+					stack.push(temp);
+				}
+				System.out.print( temp.data +" ");
+				if(temp.left != null) {
+					stack.push(temp);
+				}
+			}
+		}
+		
 	public static void main(String[] args) {
 		BinaryTree tree = new BinaryTree();
 		tree.createBinaryTree();
@@ -95,6 +157,21 @@ public class BinaryTree {
 		
 		System.out.println();
 		System.out.print("Post-order traversal: ");
+		tree.PostOrderTraversal(root);
+
+		System.out.println();
+		System.out.println("\n----traversal using Stack----");
+		
+		System.out.println();
+		System.out.print("pre-order traversal via stack:");
+		tree.PreOrderTraversal(root);
+		
+		System.out.println();
+		System.out.print("In-order traversal via stack:");
+		tree.InOrderTraversal(root);
+		
+		System.out.println();
+		System.out.print("post-order traversal via stack:");
 		tree.PostOrderTraversal(root);
 	}
 	 
