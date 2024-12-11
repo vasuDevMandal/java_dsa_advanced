@@ -147,7 +147,9 @@ public class BinaryTree {
 		BinaryTree tree = new BinaryTree();
 		tree.createBinaryTree();
 		TreeNode root = tree.root;
-		
+		System.out.println("\n----traversal using recursion----");
+		System.out.println();
+
 		System.out.print("In-order traversal: ");
 		tree.InOrderTraversal(root);
 		
