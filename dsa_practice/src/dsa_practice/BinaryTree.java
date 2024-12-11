@@ -1,5 +1,7 @@
 package dsa_practice;
 import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class BinaryTree {
 	
@@ -25,13 +27,22 @@ public class BinaryTree {
 		TreeNode node5 = new TreeNode(5);
 		TreeNode node6 = new TreeNode(6);
 		
-		root = node1;
+//		root = node1;
+//		
+//		node1.left = node2; // 2<-1->null
+//		node1.right = node4;// 2<-1->4
+//		node2.left = node3;// 3<-2->null
+//		node4.left = node5;//null<-4->5
+//		node4.right = node6;// 6<-4->5
 		
-		node1.left = node2; // 2<-1->null
-		node1.right = node4;// 2<-1->4
-		node2.left = node3;// 3<-2->null
-		node4.left = node5;//null<-4->5
-		node4.right = node6;// 6<-4->5
+		root = node4;//binary tree
+		
+		node4.left = node2; node2.left = node1;node2.right= node3;
+		node4.right = node5;node5.right = node6;
+		
+		
+		
+		
 	}
 
 	//A <-- B --> C     | B is root | left root right
@@ -82,7 +93,7 @@ public class BinaryTree {
 			
 		}
 	
-		public void preOrderViaStack(TreeNode root) {
+		public void PreOrderViaStack(TreeNode root) {
 			if(root == null) {
 				return;
 			}
@@ -94,62 +105,87 @@ public class BinaryTree {
 				TreeNode temp = stack.pop();
 				System.out.print( temp.data +" ");
 				if(temp.right != null) {
-					stack.push(temp);
+					stack.push(temp.right);
 				}
 				if(temp.left != null) {
-					stack.push(temp);
+					stack.push(temp.left);
 				}
 			}
 		}
 		
-		public void postOrderViaStack(TreeNode root) {
+		public void PostOrderViaStack(TreeNode root) {//ACB
 			if(root == null) {
 				return;
 			}
 			
-			Stack<TreeNode> stack = new Stack<>();
-			stack.push(root);
+			Stack<TreeNode> stack1 = new Stack<>();
+			Stack<TreeNode> stack2 = new Stack<>();
+			stack1.push(root);
 			
-			while(!stack.isEmpty()) {
-				TreeNode temp = stack.pop();
-				if(temp.right != null) {
-					stack.push(temp);
-				}
-				if(temp.left != null) {
-					stack.push(temp);
-				}
-				System.out.print( temp.data +" ");
-			}
-		}
-		
-		public void InOrderViaStack(TreeNode root) {
-			if(root == null) {
-				return;
-			}
-			
-			Stack<TreeNode> stack = new Stack<>();
-			stack.push(root);
-			
-			while(!stack.isEmpty()) {
-				TreeNode temp = stack.pop();
+			while(!stack1.isEmpty()) {
+				TreeNode temp = stack1.pop();
+				stack2.push(temp);
 				
-				if(temp.right != null) {
-					stack.push(temp);
-				}
-				System.out.print( temp.data +" ");
 				if(temp.left != null) {
+					stack1.push(temp.left);
+				}
+				if(temp.right != null) {
+					stack1.push(temp.right);
+				}
+			}
+			
+			// Output nodes in postorder
+	        while (!stack2.isEmpty()) {
+	            System.out.print(stack2.pop().data + " ");
+	        }
+		}
+		
+		public void InOrderViaStack(TreeNode root) {//ABC
+			if(root == null) {
+				return;
+			}
+			
+			Stack<TreeNode> stack = new Stack<>();
+			TreeNode temp = root;
+			
+			while(temp != null || !stack.isEmpty()) {
+				if(temp != null) {
 					stack.push(temp);
+					temp = temp.left;
+				}else {
+					temp = stack.pop();
+					System.out.print( temp.data +" ");
+					temp = temp.right;
 				}
 			}
 		}
+		
+		//using queue
+		public void LevelOrderTraversal(TreeNode root) {
+			if(root == null) {
+				return;
+			}
+			Queue<TreeNode> q = new LinkedList<>();
+			q.offer(root);
+			while(!q.isEmpty()) {
+				TreeNode temp = q.poll();
+				System.out.print(temp.data+" ");
+				if(temp.left != null) {
+					q.offer(temp.left);
+				}
+				if(temp.right != null) {
+					q.offer(temp.right);
+				}
+			}
+		}
+		
+		
 		
 	public static void main(String[] args) {
 		BinaryTree tree = new BinaryTree();
 		tree.createBinaryTree();
 		TreeNode root = tree.root;
-		System.out.println("\n----traversal using recursion----");
-		System.out.println();
-
+		System.out.println("\n____traversal using recursion");
 		System.out.print("In-order traversal: ");
 		tree.InOrderTraversal(root);
 		
@@ -162,19 +198,21 @@ public class BinaryTree {
 		tree.PostOrderTraversal(root);
 
 		System.out.println();
-		System.out.println("\n----traversal using Stack----");
+		System.out.println("\n____traversal using Stack");
+		System.out.print("In-order traversal via stack: ");
+		tree.InOrderViaStack(root);
 		
 		System.out.println();
-		System.out.print("pre-order traversal via stack:");
-		tree.PreOrderTraversal(root);
+		System.out.print("pre-order traversal via stack: ");
+		tree.PreOrderViaStack(root);
 		
 		System.out.println();
-		System.out.print("In-order traversal via stack:");
-		tree.InOrderTraversal(root);
+		System.out.print("post-order traversal via stack: ");
+		tree.PostOrderViaStack(root);
 		
 		System.out.println();
-		System.out.print("post-order traversal via stack:");
-		tree.PostOrderTraversal(root);
+		System.out.print("\n____Level order traversal via queue: \n");
+		tree.LevelOrderTraversal(root);
 	}
 	 
 
