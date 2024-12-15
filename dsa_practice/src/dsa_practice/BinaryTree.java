@@ -179,7 +179,23 @@ public class BinaryTree {
 			}
 		}
 		
-		
+		public int FindMax(TreeNode root) {
+			if(root == null) {//base case
+				return Integer.MIN_VALUE;
+			}
+			int result =  root.data;
+			int left = FindMax(root.left);
+			int right = FindMax(root.right);
+			
+			if(left > result) {
+				result = left;
+			}
+			if(right > result) {
+				result = right;
+			}
+			
+			return result;
+		}
 		
 	public static void main(String[] args) {
 		BinaryTree tree = new BinaryTree();
@@ -213,6 +229,9 @@ public class BinaryTree {
 		System.out.println();
 		System.out.print("\n____Level order traversal via queue: \n");
 		tree.LevelOrderTraversal(root);
+		
+		System.out.println();
+		System.out.print("find max: " + tree.FindMax(root));
 	}
 	 
 
