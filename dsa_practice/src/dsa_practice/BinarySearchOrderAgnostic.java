@@ -10,7 +10,6 @@ public class BinarySearchOrderAgnostic {
 
         System.out.print("ans: " + ans);
 
-        System.out.println();
     }
 
     //return the index
