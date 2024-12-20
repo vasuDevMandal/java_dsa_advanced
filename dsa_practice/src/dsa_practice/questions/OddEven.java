@@ -1,5 +1,5 @@
-package dsa_practice;
-
+package dsa_practice.questions;
+//https://youtu.be/fzip9Aml6og?list=PL9gnSGHSqcnr_DxHsP7AW9ftq0AtAyYqJ&t=2122
 public class OddEven {
 
     public static void main(String[] args) {
