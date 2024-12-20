@@ -5,7 +5,7 @@ public class BinarySearchRecursion {
     public static void main(String[] args) {
 
         int[] arr = {-2,0,2,3,6,8,9,13,35,45,67,78,89,90};
-        int ans = search(arr,90,0, arr.length-1);
+        int ans = search(arr,-2,0, arr.length-1);
         System.out.println("index: " + ans);
     }
 
