@@ -1,7 +1,8 @@
 package leetcodeProblems;
 
 import java.util.ArrayList;
-
+//similar DICECombo
+//https://leetcode.com/problems/letter-combinations-of-a-phone-number/
 public class LetterComboPhoneNum_Q17LC {
     public static void main(String[] args) {
         comboNum("","12");
