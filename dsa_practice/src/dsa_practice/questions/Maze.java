@@ -6,6 +6,7 @@ public class Maze {
     }
 
     static int count(int r, int c){
+        System.out.println("("+ r +","+ c +")");
         if(r==1 || c==1){
             return 1;
         }
