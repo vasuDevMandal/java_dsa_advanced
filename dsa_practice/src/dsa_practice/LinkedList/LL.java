@@ -135,6 +135,20 @@ public class LL {
         System.out.print("null\n");
     }
 
+    public void deleteDuplicates(){
+
+        Node temp = head;
+        while(temp.next != null){
+            if(temp.value == temp.next.value){
+                temp.next = temp.next.next;
+                size--;
+            }else{
+                temp = temp.next;
+            }
+        }
+        tail = temp;
+        temp.next = null;
+    }
 
 
     // insert using recursion
