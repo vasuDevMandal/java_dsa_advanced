@@ -19,5 +19,20 @@ public class Main {
 
         System.out.println( ll.deleteFirst());
         ll.printList();
+
+//        System.out.println(ll.deleteLast());
+//        ll.printList();
+//        System.out.println(ll.deleteLast());
+//        ll.printList();
+//        System.out.println(ll.deleteLast());
+//        ll.printList();
+
+        System.out.println("delete at index");
+        System.out.println(ll.deleteAtIndex(2));
+        ll.printList();
+        System.out.println(ll.deleteAtIndex(1));
+        ll.printList();
+
+        System.out.println(ll.find(45));
     }
 }
