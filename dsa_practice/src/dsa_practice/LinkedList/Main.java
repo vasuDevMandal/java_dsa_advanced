@@ -17,6 +17,7 @@ public class Main {
         ll.insertAtIndex(12,3);
         ll.insertAtIndex(90,5);
 
-//        ll.printList();
+        System.out.println( ll.deleteFirst());
+        ll.printList();
     }
 }
