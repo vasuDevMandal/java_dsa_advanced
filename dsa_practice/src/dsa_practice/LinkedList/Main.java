@@ -54,18 +54,38 @@ public class Main {
 //        ll.insertRec(345,2);
 //        ll.printList();
 
-        ll.insertLast(1);
-        ll.insertLast(1);
-        ll.insertLast(1);
-        ll.insertLast(2);
-        ll.insertLast(2);
-        ll.insertLast(2);
-        ll.insertLast(4);
-        ll.insertLast(4);
-        ll.insertLast(4);
-        ll.insertLast(4);
-        ll.printList();
-        ll.deleteDuplicates();
-        ll.printList();
+        //remove duplicates
+//        ll.insertLast(1);
+//        ll.insertLast(1);
+//        ll.insertLast(1);
+//        ll.insertLast(2);
+//        ll.insertLast(2);
+//        ll.insertLast(2);
+//        ll.insertLast(4);
+//        ll.insertLast(4);
+//        ll.insertLast(4);
+//        ll.insertLast(4);
+//        ll.printList();
+//        ll.deleteDuplicates();
+//        ll.printList();
+
+
+        LL first = new LL();
+        LL second = new LL();
+
+        first.insertLast(1);
+        first.insertLast(3);
+        first.insertLast(9);
+
+        second.insertLast(1);
+        second.insertLast(5);
+        second.insertLast(11);
+        second.insertLast(15);
+        second.insertLast(20);
+
+        LL ans = LL.merge(first,second);
+
+        ans.printList();
+
     }
 }
