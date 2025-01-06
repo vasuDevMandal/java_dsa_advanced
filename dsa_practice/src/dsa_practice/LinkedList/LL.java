@@ -10,6 +10,20 @@ public class LL {
         this.size = 0;
     }
 
+    private class Node{
+        private int value;
+        private Node next;
+
+        public Node(int val) {
+            this.value = val;
+        }
+        public Node(int val, Node next){
+            this.value = val;
+            this.next = next;
+        }
+
+    }
+
     public void insertFirst(int val){
         Node node = new Node(val);
         node.next = head;
@@ -121,19 +135,7 @@ public class LL {
         System.out.print("null\n");
     }
 
-    private class Node{
-        private int value;
-        private Node next;
 
-        public Node(int val) {
-            this.value = val;
-        }
-        public Node(int val, Node next){
-            this.value = val;
-            this.next = next;
-        }
-
-    }
 
 
 }
