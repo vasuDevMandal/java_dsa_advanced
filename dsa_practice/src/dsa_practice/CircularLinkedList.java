@@ -183,6 +183,50 @@ public class CircularLinkedList {
 		return first;
 	}
 
+	//Q202 happy number
+	//https://leetcode.com/problems/happy-number/description/
+
+	public boolean isHappy(int n) {
+		int slow = n;
+		int fast = n;
+
+		do {
+			slow = findSquare(slow);
+			fast = findSquare(findSquare(fast));//run 2 times as it was fast moving
+		} while (fast != slow);
+
+		if(slow == 1){
+			return true;
+		}
+		return false;
+	}
+
+	private int findSquare(int number){
+		int ans = 0;
+		while(number > 0){
+			int rem = number % 10;//get unit digit as remainder
+			ans += rem * rem; // square and add to answer
+			number = number / 10; // remove unit digit
+		}
+		return ans;
+	}
+	//876. Middle of the Linked List
+	//https://leetcode.com/problems/middle-of-the-linked-list/description/
+	public ListNode middleNode(ListNode head) {
+
+		ListNode slow = head;
+		ListNode fast = head;
+
+		while(fast != null && fast.next != null){
+			if(slow!= fast){
+				slow = slow.next;
+				fast = fast.next.next;
+			}
+		}
+		return slow;
+
+	}
+
 	public static void main(String[] args) {
 		
 		CircularLinkedList cll = new CircularLinkedList();
