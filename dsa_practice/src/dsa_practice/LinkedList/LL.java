@@ -318,4 +318,30 @@ public class LL {
         return slow;
 
     }
+
+    //https://leetcode.com/problems/reorder-list/description/
+    public void reorderList(Node head) {
+        if(head == null || head.next == null){
+            return;
+        }
+        Node mid = middleNode(head);
+
+        Node first = head;
+        Node second = reverseList(mid);
+
+        // rearrange
+        while(first != null && second != null){
+            Node temp = first.next;
+            first.next = second;
+            first = temp;
+
+            temp = second.next;
+            second.next = first;
+            second = temp;
+        }
+
+        if(first != null){
+            first.next = null;
+        }
+    }
 }
