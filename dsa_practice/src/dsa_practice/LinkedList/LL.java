@@ -196,4 +196,19 @@ public class LL {
 
         return ans;
     }
+
+    //reverse LL recursive
+    public void reverseLL(Node node){
+        if(node == tail){
+            head = tail;
+            return;
+        }
+        reverseLL(node.next);
+        //reverse the linkage
+        tail.next = node;
+        tail = node;
+        tail.next = null;
+
+    }
+
 }

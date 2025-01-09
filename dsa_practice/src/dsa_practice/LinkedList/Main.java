@@ -84,7 +84,10 @@ public class Main {
         second.insertLast(20);
 
         LL ans = LL.merge(first,second);
+        ans.printList();
 
+        //reverse list
+        ans.reverseLL(ans.find(1));
         ans.printList();
 
     }
