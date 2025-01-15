@@ -347,12 +347,12 @@ public class LL {
 
     public Node rotateRight(int k) {
 
-        if(k<=0 || head == null){
+        if(k<=0 || head == null || head.next != null){
             return head;
         }
         Node last = head;
         int length = 1;
-        while (last != null && last.next != null){
+        while (last.next != null){
             last = last.next;
             length++;
         }
