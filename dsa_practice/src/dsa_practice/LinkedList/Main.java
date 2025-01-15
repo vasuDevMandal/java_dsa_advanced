@@ -4,16 +4,23 @@ public class Main {
 
     public static void main(String[] args) {
         LL ll = new LL();
-//
+
 //        ll.insertFirst(3);
 //        ll.insertFirst(5);
 //        ll.insertFirst(6);
 //        ll.insertFirst(8);
-//
-//        ll.insertLast(55);
-//        ll.insertLast(45);
-//        ll.printList();
-//
+
+        ll.insertLast(1);
+        ll.insertLast(2);
+        ll.insertLast(3);
+        ll.insertLast(4);
+        ll.insertLast(5);
+        ll.printList();
+
+        ll.rotateRight(3);
+
+        ll.printList();
+
 //        ll.insertAtIndex(12,3);
 //        ll.insertAtIndex(90,5);
 //
@@ -69,26 +76,26 @@ public class Main {
 //        ll.deleteDuplicates();
 //        ll.printList();
 
-
-        LL first = new LL();
-        LL second = new LL();
-
-        first.insertLast(1);
-        first.insertLast(3);
-        first.insertLast(9);
-
-        second.insertLast(1);
-        second.insertLast(5);
-        second.insertLast(11);
-        second.insertLast(15);
-        second.insertLast(20);
-
-        LL ans = LL.merge(first,second);
-        ans.printList();
-
-        //reverse list
-        ans.reverseLL(ans.find(1));
-        ans.printList();
+//merge 2 lists
+//        LL first = new LL();
+//        LL second = new LL();
+//
+//        first.insertLast(1);
+//        first.insertLast(3);
+//        first.insertLast(9);
+//
+//        second.insertLast(1);
+//        second.insertLast(5);
+//        second.insertLast(11);
+//        second.insertLast(15);
+//        second.insertLast(20);
+//
+//        LL ans = LL.merge(first,second);
+//        ans.printList();
+//
+//        //reverse list
+//        ans.reverseLL(ans.find(1));
+//        ans.printList();
 
     }
 }

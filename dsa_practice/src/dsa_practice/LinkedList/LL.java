@@ -344,4 +344,30 @@ public class LL {
             first.next = null;
         }
     }
+
+    public Node rotateRight(int k) {
+
+        if(k<=0 || head == null){
+            return head;
+        }
+        Node last = head;
+        int length = 1;
+        while (last != null && last.next != null){
+            last = last.next;
+            length++;
+        }
+
+        last.next = head;
+        int rotations = k % length;
+        int skip = length - rotations;
+
+        Node newLast = head;
+        for (int i = 0; i < skip - 1 ; i++) {
+            newLast = newLast.next;
+        }
+        head = newLast.next;
+        newLast.next = null;
+
+        return head;
+    }
 }
