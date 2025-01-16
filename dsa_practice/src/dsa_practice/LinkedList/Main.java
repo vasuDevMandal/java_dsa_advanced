@@ -17,7 +17,7 @@ public class Main {
         ll.insertLast(5);
         ll.printList();
 
-        ll.rotateRight(3);
+        ll.rotateRight(6);
 
         ll.printList();
 

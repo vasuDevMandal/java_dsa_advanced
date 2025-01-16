@@ -1,7 +1,5 @@
 package dsa_practice.LinkedList;
 
-import dsa_practice.CircularLinkedList;
-
 public class LL {
 
     private Node head;
@@ -344,10 +342,16 @@ public class LL {
             first.next = null;
         }
     }
+//https://leetcode.com/problems/reverse-nodes-in-k-group/
+    public Node reverseKGroup(Node head, int k) {
+
+
+        return head;
+    }
 
     public Node rotateRight(int k) {
 
-        if(k<=0 || head == null || head.next != null){
+        if(k<=0 || head == null || head.next == null){
             return head;
         }
         Node last = head;
