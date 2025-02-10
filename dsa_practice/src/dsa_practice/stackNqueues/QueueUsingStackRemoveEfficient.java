@@ -27,7 +27,7 @@ public class QueueUsingStackRemoveEfficient {
     }
 
     public int peek() throws Exception{
-
+        //does not remove
         return first.peek();
     }
 
