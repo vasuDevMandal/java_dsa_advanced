@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class ValidParenthesis {
 
-
+//LC 20
     boolean checkParenthesis(String s) {
         Stack<Character> stack = new Stack<>();
 
