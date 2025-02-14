@@ -42,12 +42,12 @@ class BST {
             return;
         }
         System.out.println(details + node.getValue());
-        display(node.left,"Left child of: " + node.getValue());
-        display(node.right,"Right child of: " + node.getValue());
+        display(node.left,"Left child of " + node.getValue() + " -> ");
+        display(node.right,"Right child of " + node.getValue() + " -> ");
     }
 
     private void insert(int value){
-
+        root = insert(value, root);
     }
 
     private Node insert(int value, Node node){
@@ -63,12 +63,62 @@ class BST {
             node.right = insert(value, node.right);
         }
 
+        node.height = Math.max(height(node.left), height(node.right)) + 1;
         return node;
     }
 
 
+    public boolean balanced(){
+        return balanced(root);
+    }
+    private boolean balanced(Node node){
+        if(node == null){
+            return true;
+        }
+        return Math.abs(height(node.left) - height(node.right)) <= 1
+                && balanced(node.left) && balanced(node.right);
+    }
 
 
+    public void populate(int[] nums){
+        for (int i = 0; i < nums.length; i++) {
+            this.insert(nums[i]);
+        }
+    }
+
+    public static void main(String[] args) {
+        BST tree = new BST();
+        int[] nums = {35,9,2,42,124,4,6,56,732,23,8};
+        tree.populate(nums);
+        tree.display();
+    }
+
+    //similar for others
+    public void preOrder(){
+        preOrderTraversal(root);
+    }
+
+    private void preOrderTraversal(Node node){
+        if(node == null){
+            return;
+        }
+        System.out.println(node.value + " " );
+        preOrderTraversal(node.left);
+        preOrderTraversal(node.right);
+    }
+
+    public void inOrder(){
+       inOrderTraversal(root);
+    }
+
+    private void inOrderTraversal(Node node){
+        if(node == null){
+            return;
+        }
+        inOrderTraversal(node.left);
+        System.out.println(node.value + " " );
+        inOrderTraversal(node.right);
+    }
 
 
 }
