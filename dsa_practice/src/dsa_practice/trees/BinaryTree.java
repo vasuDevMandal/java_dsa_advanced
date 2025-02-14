@@ -17,7 +17,6 @@ class BinaryTree {
             this.value = value;
         }
     }
-
     private Node root;
 
 //    insert elements
@@ -46,7 +45,27 @@ class BinaryTree {
             node.right = new Node( value );
             populate(scanner, node.right);
         }
+    }
+
+    public void display(){
+        display(root, " ");
+    }
+    private void display(Node node, String indent){
+        if(node == null){
+            return;
+        }
+        System.out.println( indent + node.value);//printing root first
+        display(node.left, indent + "\t");
+        display(node.right, indent + "\t");
 
     }
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        BinaryTree bt = new BinaryTree();
+        bt.populate(scanner);
+        bt.display();
+
+
+    }
 }
