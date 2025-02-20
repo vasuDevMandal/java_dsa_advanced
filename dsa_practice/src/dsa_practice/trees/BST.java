@@ -1,5 +1,10 @@
 package dsa_practice.trees;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 class BST {
     public class Node {
         private int value;
@@ -86,12 +91,6 @@ class BST {
         }
     }
 
-    public static void main(String[] args) {
-        BST tree = new BST();
-        int[] nums = {35,9,2,42,124,4,6,56,732,23,8};
-        tree.populate(nums);
-        tree.display();
-    }
 
     //similar for others
     public void preOrder(){
@@ -120,5 +119,44 @@ class BST {
         inOrderTraversal(node.right);
     }
 
+    public List<List<Integer>> levelOrder(Node root) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        if(root == null){
+            return result;
+        }
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);//retrieves and removes first-element/head from queue
+
+        while(!queue.isEmpty()){
+            int levelSize = queue.size();
+            List<Integer> currentLevel = new ArrayList<>(levelSize);
+
+            for (int i = 0; i < levelSize; i++) {
+                Node currentNode = queue.poll();
+                currentLevel.add(currentNode.value);//adding 1 node
+                if(currentNode.left !=  null){
+                    queue.offer(currentNode.left);
+                }
+                if(currentNode.right !=  null){
+                    queue.offer(currentNode.right);
+                }
+            };
+
+            result.add(currentLevel);
+        }
+
+        return result;
+
+    }
+
+    public static void main(String[] args) {
+        BST tree = new BST();
+        int[] nums = {35,9,2,42,124,4,6,56,732,23,8};
+        tree.populate(nums);
+
+        tree.display();
+    }
 
 }
