@@ -119,28 +119,31 @@ class BST {
         inOrderTraversal(node.right);
     }
 
+//    https://leetcode.com/problems/binary-tree-level-order-traversal/
     public List<List<Integer>> levelOrder(Node root) {
         List<List<Integer>> result = new ArrayList<>();
 
         if(root == null){
             return result;
         }
-
+        //FIFO is used in level order, so we are using queue
         Queue<Node> queue = new LinkedList<>();
         queue.offer(root);//retrieves and removes first-element/head from queue
 
+        //every iteration of while loop check single level as for loop run according to level size
         while(!queue.isEmpty()){
             int levelSize = queue.size();
             List<Integer> currentLevel = new ArrayList<>(levelSize);
 
+            //for loop is running over queue elements
             for (int i = 0; i < levelSize; i++) {
-                Node currentNode = queue.poll();
+                Node currentNode = queue.poll();//read head item from a queue
                 currentLevel.add(currentNode.value);//adding 1 node
-                if(currentNode.left !=  null){
-                    queue.offer(currentNode.left);
+                if(currentNode.left !=  null){//check if current node has left node
+                    queue.offer(currentNode.left);//add left node to queue
                 }
-                if(currentNode.right !=  null){
-                    queue.offer(currentNode.right);
+                if(currentNode.right !=  null){//check if current node has right nodes
+                    queue.offer(currentNode.right);//add right node to queue
                 }
             };
             result.add(currentLevel);
@@ -159,21 +162,25 @@ class BST {
         Queue<Node> queue = new LinkedList<>();
         queue.offer(root);
 
+        //every iteration of while loop check single level as for loop run according to level size
         while(!queue.isEmpty()){
             int levelSize = queue.size();
             double averageLevel = 0;
 
+            //for loop is running over queue elements
             for (int i = 0; i < levelSize; i++) {
-                Node currentNode = queue.poll();
-                averageLevel += currentNode.value;
-                if(currentNode.left !=  null){
-                    queue.offer(currentNode.left);
+                Node currentNode = queue.poll();//read every item from a queue
+                averageLevel += currentNode.value;//add all level order nodes
+                if(currentNode.left !=  null){//check if current node has left node
+                    queue.offer(currentNode.left);//add left node to queue
                 }
-                if(currentNode.right !=  null){
-                    queue.offer(currentNode.right);
+                if(currentNode.right !=  null){//check if current node has right nodes
+                    queue.offer(currentNode.right);//add right node to queue
                 }
             };
+            //get the average of level
             averageLevel = averageLevel / levelSize;
+            //add level average to list
             result.add(averageLevel);
         }
         return result;
