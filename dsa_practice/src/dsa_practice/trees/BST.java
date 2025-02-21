@@ -1,9 +1,6 @@
 package dsa_practice.trees;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 class BST {
     public class Node {
@@ -182,6 +179,77 @@ class BST {
             averageLevel = averageLevel / levelSize;
             //add level average to list
             result.add(averageLevel);
+        }
+        return result;
+    }
+
+    //google asked
+    public Node findLevelOrderSuccessor(Node root, int key){
+        if(root == null){
+            return null;
+        }
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+
+        //every iteration of while loop check single level as for loop run according to level size
+        while(!queue.isEmpty()){
+
+            Node currentNode = queue.poll();//read every item from a queue
+            if(currentNode.left !=  null){//check if current node has left node
+                queue.offer(currentNode.left);//add left node to queue
+            }
+            if(currentNode.right !=  null){//check if current node has right nodes
+                queue.offer(currentNode.right);//add right node to queue
+            }
+            if(key == currentNode.value){
+                break;
+            }
+        }
+        return queue.peek();
+    }
+
+    //https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
+    public List<List<Integer>> zigzagLevelOrder(Node root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if(root == null){
+            return result;
+        }
+        //from both ends we are adding and removing
+        Deque<Node> deque = new LinkedList<>();
+        deque.offer(root);//retrieves and removes first-element/head from deque
+        boolean reverse = false;
+
+        //every iteration of while loop check single level as for loop run according to level size
+        while(!deque.isEmpty()){
+            int levelSize = deque.size();
+            List<Integer> currentLevel = new ArrayList<>(levelSize);
+
+            //for loop is running over deque elements
+            for (int i = 0; i < levelSize; i++) {
+                if(!reverse){
+                    Node currentNode = deque.pollFirst();//read head item from a deque
+                    currentLevel.add(currentNode.value);//adding to list
+                    if(currentNode.left !=  null){//check if current node has left node
+                        deque.addLast(currentNode.left);//add left node to deque
+                    }
+                    if(currentNode.right !=  null){//check if current node has right nodes
+                        deque.addLast(currentNode.right);//add right node to queue
+                    }
+                }else{
+                    Node currentNode = deque.pollLast();//read head item from a deque
+                    currentLevel.add(currentNode.value);//adding to list
+
+                    if(currentNode.right !=  null){//check if current node has right nodes
+                        deque.addFirst(currentNode.right);//add right node to queue
+                    }
+                    if(currentNode.left !=  null){//check if current node has left node
+                        deque.addFirst(currentNode.left);//add left node to deque
+                    }
+                }
+            };
+            reverse = !reverse;
+            result.add(currentLevel);
         }
         return result;
     }
