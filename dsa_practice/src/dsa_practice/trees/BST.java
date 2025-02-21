@@ -150,6 +150,38 @@ class BST {
         }
         return result;
     }
+//https://leetcode.com/problems/binary-tree-right-side-view/
+    public List<Integer> rightSideView(Node root) {
+        List<Integer> result = new ArrayList<>();
+
+        if(root == null){
+            return result;
+        }
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+
+        //every iteration of while loop check single level as for loop run according to level size
+        while(!queue.isEmpty()){
+            int levelSize = queue.size();
+
+            //for loop is running over queue elements
+            for (int i = 0; i < levelSize; i++) {
+                Node currentNode = queue.poll();//read every item from a queue
+                if(i == levelSize-1){
+                    result.add(currentNode.value);
+                }
+                if(currentNode.left !=  null){//check if current node has left node
+                    queue.offer(currentNode.left);//add left node to queue
+                }
+                if(currentNode.right !=  null){//check if current node has right nodes
+                    queue.offer(currentNode.right);//add right node to queue
+                }
+            };
+
+        }
+        return result;
+    }
 
     //https://leetcode.com/problems/average-of-levels-in-binary-tree/
     public List<Double> AverageOfEveryLevel(Node root) {
