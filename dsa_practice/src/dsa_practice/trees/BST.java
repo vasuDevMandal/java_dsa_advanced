@@ -116,7 +116,8 @@ class BST {
         inOrderTraversal(node.right);
     }
 
-//    https://leetcode.com/problems/binary-tree-level-order-traversal/
+//levelOrder | https://leetcode.com/problems/binary-tree-level-order-traversal/
+//bottomUp-levelOrder | https://leetcode.com/problems/binary-tree-level-order-traversal-ii/
     public List<List<Integer>> levelOrder(Node root) {
         List<List<Integer>> result = new ArrayList<>();
 
@@ -143,6 +144,8 @@ class BST {
                     queue.offer(currentNode.right);//add right node to queue
                 }
             };
+            //for bottom up use this result
+            //result.add(0,currentLevel);//at first index we add below levels
             result.add(currentLevel);
         }
         return result;
