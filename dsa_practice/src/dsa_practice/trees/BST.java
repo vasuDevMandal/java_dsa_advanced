@@ -143,12 +143,40 @@ class BST {
                     queue.offer(currentNode.right);
                 }
             };
-
             result.add(currentLevel);
         }
-
         return result;
+    }
 
+    //https://leetcode.com/problems/average-of-levels-in-binary-tree/
+    public List<Double> AverageOfEveryLevel(Node root) {
+        List<Double> result = new ArrayList<>();
+
+        if(root == null){
+            return result;
+        }
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while(!queue.isEmpty()){
+            int levelSize = queue.size();
+            double averageLevel = 0;
+
+            for (int i = 0; i < levelSize; i++) {
+                Node currentNode = queue.poll();
+                averageLevel += currentNode.value;
+                if(currentNode.left !=  null){
+                    queue.offer(currentNode.left);
+                }
+                if(currentNode.right !=  null){
+                    queue.offer(currentNode.right);
+                }
+            };
+            averageLevel = averageLevel / levelSize;
+            result.add(averageLevel);
+        }
+        return result;
     }
 
     public static void main(String[] args) {
