@@ -1,5 +1,6 @@
 package dsa_practice.trees;
 
+import javax.swing.tree.TreeNode;
 import java.util.*;
 
 class BST {
@@ -388,6 +389,20 @@ class BST {
         return Math.max(leftHeight, rightHeight);
     }
 
+    //https://leetcode.com/problems/invert-binary-tree/
+    public Node invertTree(Node root) {
+        if(root == null){
+            return null;
+        }
+        Node left = invertTree(root.left);
+        Node right = invertTree(root.right);
+
+        root.left = right;
+        root.right = left;
+
+        return root;
+
+    }
 
     public static void main(String[] args) {
         BST tree = new BST();
