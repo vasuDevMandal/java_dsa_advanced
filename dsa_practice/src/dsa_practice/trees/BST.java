@@ -265,7 +265,36 @@ class BST {
         return nodeLevel(node.right, x, level+1);
     }
 
+    //https://leetcode.com/problems/symmetric-tree/description/
+    public boolean isSymmetric(Node root) {
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root.left);
+        queue.add(root.right);
 
+        while (!queue.isEmpty()){
+            Node left = queue.poll();
+            Node right = queue.poll();
+
+            if(left == null && right == null){
+                continue;
+            }
+
+            if(left == null || right == null){
+                return false;
+            }
+
+            if(left.value != right.value){
+                return false;
+            }
+
+            queue.add(left.left);
+            queue.add(right.right);
+            queue.add(left.right);
+            queue.add(right.left);
+        }
+
+        return true;
+    }
 
 
     //google asked
@@ -344,7 +373,9 @@ class BST {
         int[] nums = {35,9,2,42,124,4,6,56,732,23,8};
         tree.populate(nums);
 
-        tree.display();
+        System.out.println("is symmetric:" + tree.isSymmetric(tree.root));
+
+//        tree.display();
     }
 
 }
