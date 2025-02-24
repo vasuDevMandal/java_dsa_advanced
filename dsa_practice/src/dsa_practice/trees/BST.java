@@ -368,6 +368,27 @@ class BST {
         return result;
     }
 
+    //DFS - https://leetcode.com/problems/diameter-of-binary-tree/description/
+    int diameterOuter = 0;
+    public int diameterOfBinaryTree(Node root) {
+        heightD(root);
+        return diameterOuter;
+    }
+    int heightD(Node node){
+        if(node == null){
+            return 0;
+        }
+
+        int leftHeight = heightD(node.left);
+        int rightHeight = heightD(node.right);
+
+        int currentNodeDiameter = leftHeight + rightHeight + 1;//+1 for currentRoot node
+        diameterOuter = Math.max(diameterOuter,currentNodeDiameter);
+
+        return Math.max(leftHeight, rightHeight);
+    }
+
+
     public static void main(String[] args) {
         BST tree = new BST();
         int[] nums = {35,9,2,42,124,4,6,56,732,23,8};
