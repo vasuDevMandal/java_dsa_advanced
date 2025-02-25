@@ -445,6 +445,26 @@ class BST {
         return left == null ? right : left;
     }
 
+    //DFS - https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/
+    int count_KthSmallest = 0;
+    public int kthSmallest(Node root, int k) {
+        return HelperKthSmallest(root,k).value;
+    }
+    public Node HelperKthSmallest(Node node, int k) {
+        if(node == null){
+            return null;
+        }
+        Node left = HelperKthSmallest(node.left, k);
+        if(left!=null){
+            return left;
+        }
+        count_KthSmallest++;
+        if(count_KthSmallest == k){
+            return node;
+        }
+        return HelperKthSmallest(node.right, k);
+    }
+
     public static void main(String[] args) {
         BST tree = new BST();
         int[] nums = {35,9,2,42,124,4,6,56,732,23,8};
