@@ -404,6 +404,31 @@ class BST {
 
     }
 
+    //Validate Binary Search Tree - https://leetcode.com/problems/validate-binary-search-tree/description/
+    public boolean isValidBST(Node root) {
+        return helper(root, null, null);
+    }
+    private boolean helper(Node node, Integer low, Integer high){
+        if(node == null){
+            return true;
+        }
+
+        if(low != null && node.value <= low){
+            return false;
+        }
+
+        if(high != null && node.value >= high){
+            return false;
+        }
+
+        boolean leftTree = helper(node.left, low, node.value);
+        boolean rightTree = helper(node.right, node.value, high) ;
+
+        return leftTree && rightTree;
+    }
+
+
+
     public static void main(String[] args) {
         BST tree = new BST();
         int[] nums = {35,9,2,42,124,4,6,56,732,23,8};
