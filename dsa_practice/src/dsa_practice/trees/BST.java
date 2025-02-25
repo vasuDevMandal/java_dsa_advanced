@@ -404,6 +404,7 @@ class BST {
 
     }
 
+    //DFS
     //Validate Binary Search Tree - https://leetcode.com/problems/validate-binary-search-tree/description/
     public boolean isValidBST(Node root) {
         return helper(root, null, null);
@@ -428,6 +429,21 @@ class BST {
     }
 
 
+    //DFS - https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
+    public Node lowestCommonAncestor(Node node, Node p, Node q) {
+        if(node == null){
+            return null;
+        }
+        if(node == p || node == q){
+            return node;
+        }
+        Node left = lowestCommonAncestor(node.left, p ,q);
+        Node right = lowestCommonAncestor(node.right, p ,q);
+        if(left != null && right != null){
+            return node;
+        }
+        return left == null ? right : left;
+    }
 
     public static void main(String[] args) {
         BST tree = new BST();
