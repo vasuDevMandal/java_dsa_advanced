@@ -14,6 +14,8 @@ public class LinearSearch {
         int[] result = search(arr, target);
         System.out.println(Arrays.toString(result));
 
+        System.out.println(max(arr));
+
     }
 
     static int[] search(int[][] arr, int target) {
@@ -27,5 +29,16 @@ public class LinearSearch {
         return new int[]{-1,-1};
     }
 
+    static int max(int[][] arr){
+        int maxVal = Integer.MIN_VALUE;
+        for (int[] rows : arr){
+            for (int num: rows){
+                if(num > maxVal){
+                    maxVal = num;
+                }
+            }
+        }
+        return maxVal;
+    }
 
 }
