@@ -13,11 +13,10 @@ public class Q34_Find_First_and_Last_Position_of_Element_in_Sorted_Array {
     static int[] searchRange(int[] nums, int target) {
 
         int[] ans = {-1,-1};
-        int startValue = search(nums, target, true);
-        int endValue = search(nums, target, false);
-
-        ans[0] = startValue;
-        ans[1] = endValue;
+        ans[0] = search(nums, target, true);
+        if(ans[0] != -1){
+            ans[1] = search(nums, target, false);
+        }
 
         return ans;
     }
