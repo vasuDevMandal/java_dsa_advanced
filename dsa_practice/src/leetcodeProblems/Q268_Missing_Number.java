@@ -1,4 +1,4 @@
-package sorting;
+package leetcodeProblems;
 
 public class Q268_Missing_Number {
 

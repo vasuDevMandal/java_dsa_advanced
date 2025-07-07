@@ -1,4 +1,4 @@
-package sorting;
+package leetcodeProblems;
 
 
 public class Q287_Find_the_Duplicate_Number {

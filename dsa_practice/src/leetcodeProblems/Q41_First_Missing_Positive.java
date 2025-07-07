@@ -1,7 +1,4 @@
-package sorting;
-
-import java.util.ArrayList;
-import java.util.List;
+package leetcodeProblems;
 
 public class Q41_First_Missing_Positive {
     public static void main(String[] args) {

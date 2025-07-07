@@ -1,4 +1,4 @@
-package Searching;
+package leetcodeProblems;
 
 public class Q852_Peak_Index_in_a_Mountain_Array {
     public static void main(String[] args) {

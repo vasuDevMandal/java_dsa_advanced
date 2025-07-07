@@ -1,8 +1,6 @@
-package sorting;
+package leetcodeProblems;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Q645_Set_Mismatch {
     public static void main(String[] args) {

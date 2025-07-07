@@ -1,4 +1,4 @@
-package Searching;
+package leetcodeProblems;
 
 public class Q744_Find_Smallest_Letter_Greater_Than_Target {
 
