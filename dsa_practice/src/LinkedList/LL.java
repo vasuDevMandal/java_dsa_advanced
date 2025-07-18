@@ -54,6 +54,39 @@ public class LL {
 
     }
 
+    public void InsertViaRecursion(int val, int index){
+        head = InsertRec(val, index, head);
+
+    }
+
+    private Node InsertRec(int val, int index, Node node){
+        if(index == 0){
+            Node temp = new Node(val,node);
+            size++;
+            return temp;
+        }
+
+        node.next = InsertRec(val, --index, node.next);
+        return node;
+    }
+
+
+    public void removeDuplicates(){
+        System.out.println("remove duplicates..");
+        Node node = head;
+        while (node.next != null){
+            if(node.value == node.next.value ){
+                node.next = node.next.next;
+                size--;
+            }else{
+                node = node.next;
+            }
+        }
+        tail = node;
+        tail.next = null;
+
+    }
+
     public int deleteFirst(){
         int val = head.value;
         head = head.next;
@@ -127,12 +160,13 @@ public class LL {
     }
 
     public void display(){
+        System.out.println("\n-Display-");
         Node temp = head;
         while (temp != null){
             System.out.print(temp.value + " -> ");
             temp = temp.next;
         }
-        System.out.print("END");
+        System.out.print("END\n");
     }
 
     private class Node{
