@@ -4,8 +4,9 @@ import java.util.Arrays;
 
 public class BubbleSort {
     public static void main(String[] args) {
-        int[] arr = {3,5,8,9,32,56,6,10};
-        bubbleSort2(arr);
+        int[] arr = {5,3,8,9,32,56,6,10};
+//        bubbleSort2(arr);
+        bubbleSortDetails(arr);
         System.out.println(Arrays.toString(arr));
     }
     static void bubbleSort1(int[]arr){
@@ -19,7 +20,6 @@ public class BubbleSort {
                 }
             }
         }
-
     }
 
     static void bubbleSort2(int[]arr){
@@ -40,6 +40,33 @@ public class BubbleSort {
                 break;
             }
         }
-
     }
+
+    static void bubbleSortDetails(int[]arr){
+        boolean swapped = false;
+        for (int i = 0; i < arr.length; i++){
+            swapped = false;
+            System.out.println("\nouter loop - index: " + i);
+            System.out.println("arr:" + Arrays.toString(arr));
+            for (int j = 1; j < arr.length - i; j++) {
+                System.out.println("\tinner loop - index: " + j);
+                if(arr[j-1] > arr[j]){
+                    swapped = true;
+                    System.out.println("\t\tswapped");
+                    System.out.println("\t\t\tindexes: " + (j-1) + "<=>" + j );
+                    System.out.println("\t\t\tvalues: " + arr[j-1] + " <=> " + arr[j]);
+                    //swap
+                    int temp = arr[j];
+                    arr[j] = arr[j-1];
+                    arr[j-1] = temp;
+
+                }
+            }
+            if (!swapped){
+                //array is sorted
+                return;
+            }
+        }
+    }
+
 }

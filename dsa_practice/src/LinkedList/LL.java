@@ -160,7 +160,7 @@ public class LL {
     }
 
     public void display(){
-        System.out.println("\n-Display-");
+        System.out.println("-Display-");
         Node temp = head;
         while (temp != null){
             System.out.print(temp.value + " -> ");
@@ -181,6 +181,104 @@ public class LL {
             this.value = val;
             this.next = next;
         }
+    }
+
+    void sortViaBubble(){
+        sortViaBubbleSort(size - 1, 0);
+    }
+
+    private void sortViaBubbleSort(int row, int col){
+        if(row == 0){
+            return;
+        }
+        if(col < row){
+            Node first = get( col);
+            Node second = get( col+ 1);
+            if(first.value > second.value){
+                //swap
+                if(first == head){
+                    head = second;
+                    first.next = second.next;
+                    second.next = first;
+                }else if(second == tail){
+                    Node prev = get(col-1);
+                    prev.next = second;
+                    tail = first;
+                    first.next = null;
+                    second.next = tail;
+                } else {
+                    Node prev = get(col -1);
+                    prev.next = second;
+                    first.next = second.next;
+                    second.next = first;
+                }
+            }
+
+            sortViaBubbleSort(row, col + 1);
+        }else {
+            sortViaBubbleSort(row - 1, 0);
+        }
+
+    }
+
+//    recursion reverse of linked list
+    void reverseListRecursive(Node node){
+        //base condition
+        if(node == tail){
+            head = tail;
+            return;
+        }
+        //it keeps calling itself, till it reach the last node and call base condition
+        reverseListRecursive(node.next);
+
+        //it starts executing, when we are at last node
+        tail.next = node;
+        tail = node;
+        tail.next = null;
+    }
+
+    //iterative reverse linked list
+    public void reverseIter(){
+        System.out.println("iterative reverse list");
+        if(size < 2){
+            return;
+        }
+    //    initializing pointers
+        Node prev = null;
+        Node present = head;
+        Node next = present.next;
+    //  loop for iterating over all list items
+        while (present != null){
+            present.next = prev;
+            prev = present;
+            present = next;
+            if(next != null){
+                next = next.next;
+            }
+        }
+        head = prev;
+    }
+
+    //reverse in between
+    public void reverseBetween(Node head, int left, int right){
+        System.out.println("iterative reverse list");
+        if(size < 2){
+            return;
+        }
+        //    initializing pointers
+        Node prev = null;
+        Node present = head;
+        Node next = present.next;
+        //  loop for iterating over all list items
+        while (present != null){
+            present.next = prev;
+            prev = present;
+            present = next;
+            if(next != null){
+                next = next.next;
+            }
+        }
+        head = prev;
     }
 
 

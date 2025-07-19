@@ -4,24 +4,28 @@ public class Main {
     public static void main(String[] args) {
         LL list  = new LL();
 
-        list.insertFirst(22);
-        list.insertFirst(22);
-        list.insertFirst(23);
-        list.insertFirst(23);
-        list.insertFirst(24);
-        list.insertFirst(24);
-        list.insertFirst(24);
+        list.insertFirst(411);
+        list.insertFirst(45);
         list.insertFirst(25);
+        list.insertFirst(24);
 
 //        list.InsertViaRecursion(111,2);
-//        list.insertLast(55);
-//        list.insertLast(66);
+        list.insertLast(155);
+        list.insertLast(66);
 //
 //        list.insertAtIndex(101, 4);
-//
         list.display();
 
-        list.removeDuplicates();
+
+        list.sortViaBubble();
+        list.display();
+
+        list.reverseListRecursive(list.get(0));
+        list.display();;
+
+        list.reverseIter();
+
+//        list.removeDuplicates();
         list.display();
 
 //        System.out.println();

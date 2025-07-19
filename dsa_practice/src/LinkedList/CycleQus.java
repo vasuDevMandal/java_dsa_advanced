@@ -3,7 +3,91 @@ package LinkedList;
 public class CycleQus {
 
     public static void main(String[] args) {
+//[-1,5,3,4,0]
+//        ListNode head = new ListNode(-1);
+//        ListNode two = new ListNode(5);
+//        ListNode three = new ListNode(3);
+//        ListNode four = new ListNode(4);
+//        ListNode five = new ListNode(0);
+//        head.next = two;
+//        two.next = three;
+//        three.next = four;
+//        four.next = five;
+//        five.next = null;
 
+        ListNode head = new ListNode(-1);
+        head.next = new ListNode(5);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(0);
+        display(head);
+
+        sortList(head);
+        display(head);
+    }
+
+    static ListNode get(ListNode head,int index){
+        ListNode node = head;
+        for (int i = 0; i < index; i++) {
+            node = node.next;
+        }
+        return node;
+    }
+    static ListNode sortList(ListNode head) {
+//        System.out.println("\n- sortList - ");
+        if(head == null || head.next == null){
+            return head;
+        }
+        ListNode mid = middleNodeForMergerSort(head);
+        ListNode left = sortList(head);
+        ListNode right = sortList(mid);
+        return mergeTwoLists(left, right);
+    }
+
+    public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        ListNode dummyHead = new ListNode();
+        ListNode tail = dummyHead;
+        while(list1 != null && list2 != null){
+            if(list1.val < list2.val){
+                tail.next = list1;
+                list1 = list1.next;
+                tail = tail.next;
+            }else{
+                tail.next = list2;;
+                list2 = list2.next;
+                tail = tail.next;
+            }
+        }
+        tail.next = (list1 != null) ? list1 :  list2;
+        return dummyHead.next;
+    }
+
+    static ListNode middleNodeForMergerSort(ListNode head) {
+        //break the list, bcoz, we are running loop till null in merge
+        //two list should not be connected
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode prev = head;
+        while(fast != null && fast.next!= null){
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        if(prev != null){
+            prev.next = null;
+        }
+        return slow;
+    }
+
+//  works on single list only
+    static ListNode middleNode(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast != null && fast.next!= null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
     }
 //find if list has cycle
     public boolean hasCycle(ListNode head) {
@@ -87,15 +171,25 @@ public boolean isHappy(int n) {
         return ans;
     }
 
+    static void display(ListNode head){
+        ListNode temp = head;
+        System.out.println("\n- display -");
+        while (temp != null){
+            System.out.print(temp.val + " -> ");
+            temp = temp.next;
+        }
+        System.out.println("END\n");
+    }
+
 //      Definition for singly-linked list.
-      class ListNode {
-          int val;
-          ListNode next;
-          ListNode(int x) {
-              val = x;
-              next = null;
-          }
-      }
+
+    public static class ListNode {
+        int val;
+        ListNode next;
+        ListNode() {}
+        ListNode(int val) { this.val = val; }
+        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+    }
 
 
 }
