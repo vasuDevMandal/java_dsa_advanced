@@ -1,5 +1,7 @@
 package LinkedList;
 
+import org.w3c.dom.Node;
+
 public class CycleQus {
 
     public static void main(String[] args) {
@@ -19,11 +21,35 @@ public class CycleQus {
         head.next = new ListNode(5);
         head.next.next = new ListNode(3);
         head.next.next.next = new ListNode(4);
-        head.next.next.next.next = new ListNode(0);
+        head.next.next.next.next = new ListNode(8);
         display(head);
 
-        sortList(head);
+//        sortList(head);
+        rotateRight(head, 8);
         display(head);
+    }
+
+    static ListNode rotateRight(ListNode head, int k) {
+        if(head == null || head.next == null || k <= 0){
+            return head;
+        }
+        int length = 1;
+        ListNode last = head;
+        while(last.next != null){
+            last = last.next;
+            length++;
+        }
+        last.next = head;
+        int rotations = k % length;
+        int skip = length - rotations;
+        ListNode newLast = head;
+        for (int i = 0; i < skip - 1 ; i++) {
+            newLast = newLast.next;
+        }
+        head = newLast.next;
+        newLast.next = null;
+        return head;
+
     }
 
     static ListNode get(ListNode head,int index){
