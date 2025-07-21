@@ -21,11 +21,55 @@ public class EasyArraysQus {
 //        int[] candies = {2,3,5,1,3};
 //        System.out.println(kidsWithCandies(candies,3));
 
+//        int[] nums = {1,2,3,1,1,3};
+//        System.out.println(numIdenticalPairs(nums));
+
+//        int[] nums = {8,1,2,2,3};
+//        System.out.println(Arrays.toString(smallerNumbersThanCurrent(nums)));
+
+        int[] nums = {0,1,2,3,4};
+        int[] index = {0,1,2,2,1};
+        System.out.println(Arrays.toString(createTargetArray(nums,index)));
+
+
+    }
+
+    //1389. Create Target Array in the Given Order
+    static int[] createTargetArray(int[] nums, int[] index) {
+        int[] target = new int[index.length];
+        for (int i = 0; i < index.length; i++) {
+            for(int j = index.length -1; j > index[i]; j--){
+                target[j] = target[j-1];
+            }
+            target[index[i]] = nums[i];
+        }
+        return target;
+    }
+
+    static int[] smallerNumbersThanCurrent(int[] nums) {
+        int[] ans = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 0; j < nums.length; j++) {
+                if(nums[i] > nums[j]){
+                    ans[i]++;
+                }
+            }
+        }
+        return ans;
     }
 
 //    1512. Number of Good Pairs
     static int numIdenticalPairs(int[] nums) {
-
+        int count = 0;
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if(nums[i] == nums[j]){
+                    count++;
+                }
+            }
+        }
+        return count;
+        
     }
 
 
