@@ -1,9 +1,6 @@
 package arraysQus;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class arrayQusEsy {
     public static void main(String[] args) {
@@ -12,11 +9,92 @@ public class arrayQusEsy {
 //        System.out.println(mat.length);
 //        System.out.println(mat[0].length);
 
-        System.out.println(addToArrayForm(new int[] {1,2,0,0},34));
+//        System.out.println(addToArrayForm(new int[] {1,2,0,0},34));
 //        System.out.println(32454%10);
 //        System.out.println(32454/10);
+
+        System.out.println(Arrays.toString(sumZero(5)));
     }
 
+    //1304. Find N Unique Integers Sum up to Zero
+    static int[] sumZero(int n) {
+        int[] ans = new int[n];
+        int start = 0;
+        int end = n - 1;
+        while(start < end){
+            ans[start] = -(start + 1);
+            ans[end] = start + 1;
+            start++;
+            end--;
+        }
+        return ans;
+    }
+
+    //1886. Determine Whether Matrix Can Be Obtained By Rotation
+    static boolean findRotation(int[][] mat, int[][] target) {
+        //check new matrix equal to target
+        for (int i = 0; i < 4; i++) {
+            if(matchMatrix(mat,target)){
+                return true;
+            }
+            rotateMatrix(mat);
+        }
+        return false;
+    }
+    static boolean matchMatrix(int[][] mat,int[][] target){
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[0].length; j++) {
+                if(mat[i][j] != target[i][j]) return false;
+            }
+        }
+        return true;
+    }
+    static void rotateMatrix(int[][] mat){
+        int n = mat.length;
+        //transpose only upper triangle
+        for (int i = 0; i < n; i++) {
+            for (int j = i+1; j < n; j++) {
+                int temp = mat[i][j];
+                mat[i][j]=mat[j][i];
+                mat[j][i] = temp;
+            }
+        }
+        //reverse
+        for (int i = 0; i < n; i++) {
+            int left = 0;//row start index
+            int right = mat.length - 1;//row end index
+            //swap
+            while (left<right){
+                int temp = mat[i][left];
+                mat[i][left]=mat[i][right];
+                mat[i][right] = temp;
+                left++;
+                right--;
+            }
+        }
+    }
+
+
+    //1854. Maximum Population Year
+    public int maximumPopulation(int[][] logs) {
+        int[] alive = new int[101];
+        for(int[] log : logs){
+            int birthYear = log[0];
+            int deathYear = log[1];
+            alive[birthYear - 1950]++;//inc count in person alive count
+            alive[deathYear - 1950]--;//dec count, on alive array on year it dies
+        }
+        int year = 1950;//initial year
+        int maxPop = alive[0]; // max population in year, 1950
+        for (int i = 1; i < 101 ; i++) {
+            alive[i] += alive[i-1];
+            if(alive[i] > maxPop){
+                maxPop = alive[i];
+                year = 1950 + i;
+            }
+        }
+        return year;
+    }
 
     //989. Add to Array-Form of Integer
     static List<Integer> addToArrayForm(int[] num, int k) {
