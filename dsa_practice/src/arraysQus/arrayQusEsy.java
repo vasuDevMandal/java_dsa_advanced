@@ -4,17 +4,85 @@ import java.util.*;
 
 public class arrayQusEsy {
     public static void main(String[] args) {
-
-//        int[][] mat = {{1,2},{2,3},{3,4}};
+//        int[][] mat = {{3,7,8},{9,11,13},{15,16,17}};
+//        int[][] mat = {{7,8},{1,2}};
+        int[] nums = {-2,1,-3,4,-1,2,1,-5,4};
 //        System.out.println(mat.length);
 //        System.out.println(mat[0].length);
-
 //        System.out.println(addToArrayForm(new int[] {1,2,0,0},34));
 //        System.out.println(32454%10);
 //        System.out.println(32454/10);
+//        System.out.println(Arrays.toString(sumZero(5)));
 
-        System.out.println(Arrays.toString(sumZero(5)));
+//        System.out.println(Arrays.toString(rowMin2dMat(mat)));
+//        System.out.println(Arrays.toString(colMax2dMat(mat)));
+//
+//        List<Integer> list = luckyNumbers(mat);
+//        System.out.println(list.getFirst());
+        System.out.println("\n"+maxSubArray(nums));
+
     }
+
+    //53. Maximum Subarray
+    static int maxSubArray(int[] nums) {
+        int maxSum = Integer.MIN_VALUE;
+        int currentSum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            currentSum += nums[i];
+            if(currentSum > maxSum){
+                maxSum = currentSum;
+            }
+            if(currentSum < 0){
+                currentSum = 0;
+            }
+        }
+        return maxSum;
+    }
+
+    //1380. Lucky Numbers in a Matrix
+    static List<Integer> luckyNumbers(int[][] matrix) {
+        int[] maxInCols = colMax2dMat(matrix);
+        int[] minInRows = rowMin2dMat(matrix);
+        //minimum in row and max in col; number in both matrix is the ans
+        //[3, 9, 15]
+        //[15, 16, 17] |  ans -> 15
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < minInRows.length; i++) {
+            for (int j = 0; j < maxInCols.length; j++) {
+                if( minInRows[i] == maxInCols[j]){
+                    list.add(minInRows[i]);
+                }
+            }
+        }
+        return list;
+    }
+    static int[] colMax2dMat(int[][] matrix) {
+        int[] colMaxArr = new int[matrix[0].length];
+        for (int i = 0; i < matrix[0].length; i++){
+            int maxInCol = matrix[0][i];
+            for (int j = 1; j < matrix.length; j++) {
+                if(matrix[j][i] > maxInCol){
+                    maxInCol = matrix[j][i];
+                }
+            }
+            colMaxArr[i] = maxInCol;
+        }
+        return colMaxArr;
+    }
+    static int[] rowMin2dMat(int[][] matrix) {
+        int[] rowMinArr = new int[matrix.length];
+        for (int i = 0; i < matrix.length; i++){
+            int min = matrix[i][0];
+            for (int j = 1; j < matrix[0].length; j++) {
+                if(matrix[i][j] < min){
+                    min = matrix[i][j];
+                }
+            }
+            rowMinArr[i] = min;
+        }
+        return rowMinArr;
+    }
+
 
     //1304. Find N Unique Integers Sum up to Zero
     static int[] sumZero(int n) {
