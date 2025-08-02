@@ -6,7 +6,7 @@ public class arrayQusEsy {
     public static void main(String[] args) {
 //        int[][] mat = {{3,7,8},{9,11,13},{15,16,17}};
 //        int[][] mat = {{7,8},{1,2}};
-        int[] nums = {-2,1,-3,4,-1,2,1,-5,4};
+//        int[] nums = {-2,1,-3,4,-1,2,1,-5,4};
 //        System.out.println(mat.length);
 //        System.out.println(mat[0].length);
 //        System.out.println(addToArrayForm(new int[] {1,2,0,0},34));
@@ -19,8 +19,71 @@ public class arrayQusEsy {
 //
 //        List<Integer> list = luckyNumbers(mat);
 //        System.out.println(list.getFirst());
-        System.out.println("\n"+maxSubArray(nums));
+//        System.out.println("\n"+maxSubArray(nums));
 
+    }
+
+    //66. Plus One
+    static int[] plusOne(int[] digits) {
+       int n = digits.length;
+       //loop starts from last and go to first, to do proper carry propagation
+        for (int i = n - 1; i >=0 ; i--) {
+            //if least significant digit is smaller than 9 then add and return
+            if(digits[i] < 9){
+                digits[i]++;
+                return digits;
+            }
+            digits[i]=0;
+        }
+        //if all digits were 9 in the array
+        int[] nums = new int[n+1];
+        nums[0] = 1;
+        return nums;
+    }
+    //fail for large inputs even long will fail
+//    static int[] plusOne(int[] digits) {
+//        StringBuilder sb = new StringBuilder();
+//        for(int num : digits){
+//            sb.append(num);
+//        }
+//        int combined = Integer.parseInt(sb.toString());
+//        int res = combined + 1 ;
+//
+//        String resStr = String.valueOf(res);
+//        int[] ans = new int[resStr.length()];
+//
+//        for (int i = 0; i < resStr.length(); i++) {
+//            ans[i] = Character.getNumericValue(resStr.charAt(i));
+//        }
+//        return ans;
+//    }
+
+    //566. Reshape the Matrix
+    int[][] matrixReshape(int[][] mat, int r, int c) {
+        int rows = mat.length;
+        int cols = mat[0].length;
+
+        if((rows * cols) != (r*c)) return mat;
+
+        //create new mat
+        int[][] out = new int[r][c];
+        int outRows = 0;
+        int outCols = 0;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                out[outRows][outCols] = mat[i][j];
+                outCols++;//inner loop controls cols so we are updating them for 'out' here
+
+                //max required cols reached so change rows
+                if(outCols == c){
+                    outCols = 0;
+                    outRows++;
+                }
+            }
+        }
+
+        return out;
     }
 
     //53. Maximum Subarray
