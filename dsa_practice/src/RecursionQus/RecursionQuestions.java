@@ -11,8 +11,113 @@ public class RecursionQuestions {
 
 //        int[] nums = {-1,0,3,5,9,12};
 //        System.out.println(binarySearchRec(nums, 5));
+//        System.out.println(findFirstUpperCaseChar("thisisiNDia"));
+
+//        char[] s = {'h','e','l','l','o','a'};
+//        reverseStringInPlace(s);
+//        reverseStringInPlaceRec(s);
+//        System.out.println(Arrays.toString(s));
+
+//        printNos(5);
+
+//        System.out.println(fib(3));
+//        System.out.println(recLen("this"));
+
+        insertionSortRec(new int[] {3,2,4,1}, 4);
 
     }
+    //insertion sort recursive, n is nums length
+    static void insertionSortRec(int[] nums, int n){
+        if(n <= 1){
+            return;
+        }
+
+        insertionSortRec(nums, n - 1);
+
+        int last = nums[n - 1];
+        int j = n-2;
+
+        while(j>=0 && nums[j] > last){
+            nums[j+1] = nums[j];
+            j--;
+        }
+
+        nums[j+1] = last;
+    }
+
+
+    //length of a string using recursion
+    //https://www.geeksforgeeks.org/dsa/program-for-length-of-a-string-using-recursion/
+    static int recLen(String str){
+        if(str.isEmpty()){
+            return 0;
+        }else{
+            return recLen(str.substring(1)) + 1;
+        }
+    }
+
+    //509. Fibonacci Number
+    static int fib(int n) {
+        if(n == 0 || n == 1){
+            return n;
+        }
+        return fib(n-1) + fib(n-2);
+    }
+
+    //Print 1 To N Without Loop
+    //https://www.geeksforgeeks.org/problems/print-1-to-n-without-using-loops-1587115620/1
+    static void printNos(int n) {
+        if(n<1){
+           return;
+        }
+        printNos(n-1);
+        System.out.print(n + " ");
+    }
+
+    //344. Reverse String
+    static void reverseStringInPlaceRec(char[] s) {
+        int start = 0;
+        int end = s.length-1;
+        reverseStringRec(s, 0,start,end);
+    }
+
+    private static void reverseStringRec(char[] s, int i, int start, int end) {
+        if(start < end){
+            char c = s[start];
+            s[start] = s[end];
+            s[end] = c;
+            reverseStringRec(s,i+1, start+1, end-1);
+        }
+    }
+
+    static void reverseStringInPlace(char[] s) {
+        int start = 0;
+        int end = s.length-1;
+        while(start < end){
+            char c = s[start];
+            s[start] = s[end];
+            s[end] = c;
+            start++;
+            end--;
+        }
+    }
+
+
+    //First uppercase letter in a string
+    static char findFirstUpperCaseChar(String str){
+        return firstUpperCase(str,0);
+    }
+    static char firstUpperCase(String str, int i){
+        if(str.charAt(i)=='\0'){
+            return 0;
+        }
+        if( Character.isUpperCase(str.charAt(i))){
+            return str.charAt(i);
+        }else{
+            return firstUpperCase(str,i+1);
+        }
+    }
+
 
     //704. Binary Search
     static int binarySearchRec(int[] nums, int target) {
