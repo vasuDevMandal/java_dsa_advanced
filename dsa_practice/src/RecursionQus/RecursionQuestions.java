@@ -23,9 +23,85 @@ public class RecursionQuestions {
 //        System.out.println(fib(3));
 //        System.out.println(recLen("this"));
 
-        insertionSortRec(new int[] {3,2,4,1}, 4);
+//        insertionSortRec(new int[] {3,2,4,1}, 4);
+//        int[] arr = new int[] {3,2,4,1};
+//        selectionSortRec(arr,0);
+//        System.out.println(Arrays.toString(arr));
+
+//        System.out.println(sumRec(33));
+//        System.out.println(isPrimeRec(3,2));
+
+        System.out.println(naturalNumSum(3));
 
     }
+
+    //Sum of natural numbers using recursion
+    static int naturalNumSum(int n){
+        if(n<=1){
+            return n;
+        }
+        return n + naturalNumSum( n-1);
+    }
+
+    //Recursive program for prime number, i is the divisior
+    static boolean isPrimeRec(int num, int i){
+        if(num <= 2){
+            return (num == 2) ? true : false;
+        }
+        if (num % i == 0){
+            return false;
+        }
+        if( i*i > num ){
+            return true;
+        }
+        return isPrimeRec(num, i + 1);
+    }
+    static boolean isPrime(int num){
+        //prime are greater than 1, only divisible by 1 and itself
+        if(num <= 1){
+            return false;
+        }
+        for (int i = 2; i * i< num; i++) {
+            if(num % i == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+
+    //Sum of digit of a number using recursion
+    static int sumRec(int num){
+        if(num < 10){
+            return num;
+        }
+        int digit = num % 10;
+        num = num / 10;
+
+        return digit + sumRec(num);
+    }
+
+    //selection sort recursive
+    static void selectionSortRec(int[] nums, int start){
+        if(start >= nums.length - 1){
+            return;
+        }
+        int minIndex = start;
+        for (int i = start+1; i < nums.length; i++) {
+            if(nums[i] < nums[minIndex]){
+                minIndex = i;
+            }
+        }
+        //swap
+        int temp = nums[start];
+        nums[start] = nums[minIndex];
+        nums[minIndex] = temp;
+
+        selectionSortRec(nums, start + 1);
+    }
+
+
     //insertion sort recursive, n is nums length
     static void insertionSortRec(int[] nums, int n){
         if(n <= 1){
