@@ -31,8 +31,56 @@ public class RecursionQuestions {
 //        System.out.println(sumRec(33));
 //        System.out.println(isPrimeRec(3,2));
 
-        System.out.println(naturalNumSum(3));
+//        System.out.println(naturalNumSum(3));
+//        System.out.println(isPowerOfTwo(16));
+//        System.out.println(findPower(16,4));
+        int[] numSorted= {10,20,30,40,50};
+        int[] num2 = {20,25,40,30,50};
+        System.out.println(isSorted(num2,0));
+    }
+    //Check if an Array is Sorted
+    static boolean isSorted(int[] arr, int i){
+        if(arr.length == 1) return true;
+        if(i < arr.length - 1){
+            return (arr[i] <= arr[i+1]) && isSorted(arr,i+1) ;
+        }
+        return true;
+    }
 
+    //Write a recursive function for given n(total) and a(number) to determine x, n = a^x
+    static int findPower(int n, int a){
+        return (int)(Math.log10(n) - Math.log10(a));
+    }
+
+    public boolean isPowerOfFour(int n) {
+        if(n<=0) return false;
+        if(n==1) return true;
+        if(n%4 == 0) {
+            return isPowerOfFour(n / 4);
+        }
+        return false;
+
+    }
+
+
+    //231. Power of Two
+    static boolean isPowerOfTwoBitShift(int n) {
+       int x = 1;
+       while (x <= n){
+           if(x == n) return true;
+           x = x << 1;
+       }
+       return false;
+    }
+    static boolean isPowerOfTwo(int n) {
+        for (int i = 0; i < 31; i++) {
+            int ans = (int)Math.pow(2,i);
+            if(ans == n){
+                System.out.println(n + " is power of 2^" + i);
+                return true;
+            }
+        }
+        return false;
     }
 
     //Sum of natural numbers using recursion
