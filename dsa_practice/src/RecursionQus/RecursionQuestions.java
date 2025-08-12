@@ -34,10 +34,39 @@ public class RecursionQuestions {
 //        System.out.println(naturalNumSum(3));
 //        System.out.println(isPowerOfTwo(16));
 //        System.out.println(findPower(16,4));
-        int[] numSorted= {10,20,30,40,50};
-        int[] num2 = {20,25,40,30,50};
-        System.out.println(isSorted(num2,0));
+
+//        int[] numSorted= {10,20,30,40,50};
+//        int[] num2 = {20,25,40,30,50};
+//        System.out.println(isSorted(num2,0));
+
+//        System.out.println(numberOfSteps(15));
+        System.out.println(removeDuplicatesStr("aaabbccccddd",0));
     }
+
+    //remove Duplicates from string
+    static String removeDuplicatesStr(String str, int i){
+        if (i == str.length()-1) return String.valueOf(str.charAt(i));
+        if(str.charAt(i)== str.charAt(i+1)){
+            return removeDuplicatesStr(str,i+1);
+        }
+        return str.charAt(i) + removeDuplicatesStr(str,i+1);
+    }
+
+    //1342. Number of Steps to Reduce a Number to Zero
+    static int numberOfSteps(int num) {
+        return steps(num , 0);
+    }
+    private static int steps(int num, int steps) {
+        if(num <= 0) return steps;
+        if(num % 2 == 0){
+            num /= 2;
+            return steps(num, steps + 1);
+        }else {
+            num--;
+            return steps(num, steps + 1);
+        }
+    }
+
     //Check if an Array is Sorted
     static boolean isSorted(int[] arr, int i){
         if(arr.length == 1) return true;
