@@ -10,7 +10,43 @@ public class questions {
         List<String> list =  letterCasePermutation("a1b2");
         System.out.println(list);
 
+        //rev first k ele form Q using stack
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 1; i <= 10; i++) {
+            queue.add(i);
+        }
+        System.out.println("Original Queue: " + queue);
+        reverseK(queue, 5);
+        System.out.println("After reversing first 5: " + queue);
+
     }
+    //reverse first k elements of queue using stack
+
+    public static void reverseK(Queue<Integer> queue, int k) {
+        if (queue == null || k <= 0 || k > queue.size()) {
+            return; // invalid case
+        }
+
+        Stack<Integer> stack = new Stack<>();
+
+        // Step 1: Push first k elements into stack
+        for (int i = 0; i < k; i++) {
+            stack.push(queue.remove());
+        }
+
+        // Step 2: Enqueue stack elements (reversed order)
+        while (!stack.isEmpty()) {
+            queue.add(stack.pop());
+        }
+
+        // Step 3: Move the remaining elements to back of queue
+        int size = queue.size();
+        for (int i = 0; i < size - k; i++) {
+            queue.add(queue.remove());
+        }
+    }
+
+
 //784. Letter Case Permutation
 
     //DFS approach
